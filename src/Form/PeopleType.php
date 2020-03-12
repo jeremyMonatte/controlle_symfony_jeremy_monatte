@@ -56,7 +56,7 @@ class PeopleType extends AbstractType
                 ]]
             )
             ->add('news', null, ['attr' => [
-                'name'=> "news"
+                'name' => "news",
             ]])
         ;
     }
@@ -65,6 +65,8 @@ class PeopleType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => People::class,
+            'csrf_protection' => false,
+            'allow_extra_fields' => true,
         ]);
     }
 }

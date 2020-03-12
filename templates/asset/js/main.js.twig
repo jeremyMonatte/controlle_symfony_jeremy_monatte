@@ -73,38 +73,29 @@
         $(this).removeClass("floating-label-form-group-with-focus");
       });
   });
+  function traitementAjax(event) {
+    event.preventDefault();
+    //traitement en ajax
+    // Get form
+    var fields = $(":input").serializeArray();
+    console.log(fields);
 
-  document
-    .getElementById("Disable___sendMessageButton")
-    .addEventListener("submit", function(event) {
-      event.preventDefault();
-      //traitement en ajax
-      // Get form
-      var form = $("#contactForm")[0];
-      console.log("form");
-      var data = new FormData(form);
-      console.log(data);
-
-      //traitement AJAX
-      $.ajax({
-        type: "POST",
-        enctype: "multipart/form-data",
-        url: "/upload.php",
-        data: data,
-        processData: false,
-        contentType: false,
-        cache: false,
-        timeout: 800000,
-        success: function(data) {
-          $("#output").text(data);
-          console.log("SUCCESS : ", data);
-          $("#btnSubmit").prop("disabled", false);
-        },
-        error: function(e) {
-          $("#output").text(e.responseText);
-          console.log("ERROR : ", e);
-          $("#btnSubmit").prop("disabled", false);
-        }
-      });
+    //traitement AJAX
+    $.ajax({
+      type: "POST",
+      url: "{{path('ajax')}}",
+      data: fields,
+      cache: false,
+      timeout: 800000,
+      success: function(data) {
+        console.log(data);
+      },
+      error: function(e) {
+        console.log("ERROR : ", e);
+      }
     });
+  }
+  document
+    .getElementById("sendMessageButton")
+    .addEventListener("click", traitementAjax);
 })(jQuery); // End of use strict
