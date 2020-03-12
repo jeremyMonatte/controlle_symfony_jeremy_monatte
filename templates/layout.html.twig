@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase " id="mainNav">
+		{% include 'menu.html.twig' %}
+	</nav>
+	<main>
+
+		<div class="content">
+			{% block content %}{% endblock content %}
+		</div>
+	</main>
+	{% include 'footer.html.twig' %}
+{% endblock body %}
